@@ -1,0 +1,125 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{object.paciente}}{% endblock %}
+{% block content %}
+{% include 'expediente/includes/urgenciasreev_menu.html' %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <h2 style = "color:rgba(0, 0, 128, 0.805);"  class="section-heading mb-4">Reporte Evaluación Subsecuente Urgencias</h2>
+        <h4 class="section-heading mb-4">Paciente: {{object.paciente}}</h4>
+        <div>
+          <p>Género: {{object.genero}}</p>
+
+          <p>Edad: {{object.edad}}</p>
+
+          <p style = "color:red;" >{{object.evaluacion_sec}}</p>
+
+          <b>DIAGNOSTICOS PREVIOS</b>
+          <P>{{object.dxs_previos | linebreaks | safe}}</P>
+
+           <b>SITUACION ACTUAL: </b> 
+            <p>{{object.sit_actual|linebreaks|safe}} </p>
+
+            <p><b>STATUS NEUROLOGICO</b></p>
+            <p><b>GLASGOW: {{object.ESCALA_DE_GLASGOW}}, &nbsp; &nbsp; AVPU: {{object.AVPU}}</b> &nbsp; &nbsp; Sedación: {{object.Sedacion}} 
+             &nbsp; &nbsp; {{object.meds_dosis}}  &nbsp; &nbsp; {{object.RASS}} &nbsp; &nbsp; {{object.obs_neur}}</p>
+
+             <p><b>STATUS RESPIRATORIO</b></p>
+             <p>Ventilación Mecánica: {{object.vent_mec}},  &nbsp; &nbsp; {{object.mode}}, &nbsp; &nbsp; FI02 {{object.FrIO2}},
+                &nbsp; &nbsp; FR: {{object.FrecResp}} &nbsp; &nbsp; Vt: {{object.Vt}} &nbsp; &nbsp; PEEP: {{object.PEEP}} &nbsp; &nbsp; &nbsp;  SaO2: {{object.saturacion }}
+                &nbsp; &nbsp; &nbsp; Sens: {{object.Sens}} &nbsp; &nbsp;  Pinsp: {{object.Pinsp}}, &nbsp; &nbsp;  Tinsp: {{object.Tinsp}} 
+                &nbsp; &nbsp; Cuadrantes Afectados en Rx de Tórax: {{object.Rx_Torax}} &nbsp; &nbsp; Complianza Pulmonar: {{object.lung_compl}} 
+                &nbsp; &nbsp; {{object.pit}}  (Ojo: son Kgs): </p>
+             <p>GASES ARTERIALES: pH: {{object.pH}} &nbsp; &nbsp; pCO2: {{object.pCO2}} &nbsp; &nbsp;  pO2: {{object.pO2}}  &nbsp; &nbsp; 
+                HCO3: {{object.HCO3}} &nbsp; &nbsp; EB: {{object.EB }} sO2: {{object.sO2}} &nbsp; &nbsp; <b>PaFI: {{object.PaFI}} </b>  </p>
+                <p> {{object.compl_ex}} </p>
+
+             <p><b>STATUS HEMODINAMICO</b></p>
+             <p>Diaforesis: {{object.Diaforesis}}, &nbsp; &nbsp;  FC: {{object.fc}},  &nbsp; &nbsp;   TA: {{object.tension_sistolica}}/{{object.tension_diastolica}}, &nbsp; &nbsp; <b>PAM: {{object.pam}},</b> 
+                &nbsp; &nbsp; PVC: {{object.pvc}}, &nbsp; &nbsp; Uso de Aminas: {{object.uso_aminas}}, &nbsp; &nbsp; {{object.esp_aminas}},  
+                &nbsp; &nbsp; Uso de Antihipertemsivos: {{object.antihipert}}, &nbsp; &nbsp; {{object.esp_aht }} </p>
+             <p>Ingreso IV hasta el momento actual desde su ingreso: {{object.ingreso_iv}}, &nbsp; &nbsp; Diuresis hasta el momento actual desde su ingreso: {{object.diuresis}},
+                &nbsp; &nbsp; Balance aproximado al momento actual: {{object.balance}} </p>
+
+             <p><b>SOMATOMETRIA</b></p>
+             <P>Peso: {{object.peso}}, &nbsp; &nbsp; Estatura: {{object.estatura}}, &nbsp; &nbsp; IMC: {{object.imc}}, &nbsp; &nbsp; ASC: {{object.asc}},
+                &nbsp; &nbsp; Clasificación Masa Corporal: <b>{{object.climc}}</b> </P>
+
+
+             <p><b>LABORATORIOS</b></p>
+             <p>
+                Hb: {{object.hb}} &nbsp; &nbsp; Hto: {{object.hb}} &nbsp; &nbsp; Leucocitos: {{object.leucocitos}} &nbsp; &nbsp; Neutrófilos: {{object.neutrofilos}} 
+                &nbsp; &nbsp; Basófilos: {{object.basofilos}} &nbsp; &nbsp; Esosinófilos: {{object.eosinofilos}} &nbsp; &nbsp; Linfocitos {{object.linfocitos}} 
+             </p>
+             <p>
+                Glucosa: {{object.glucosa}} &nbsp; &nbsp; Urea: {{object.Urea}} &nbsp; &nbsp; Creatinina: {{object.Creatinina}} &nbsp; &nbsp; PCR: {{object.PCR }}
+                &nbsp; &nbsp; DHL: {{object.DHL}} &nbsp; &nbsp; TGP: {{object.TGP}} &nbsp; &nbsp; TGO: {{object.TGO}} &nbsp; &nbsp; Bilirrubinas Tot: {{object.bilirrTot}}
+             </p>
+             <p>
+                Na: {{object.Na}} &nbsp; &nbsp; K: {{object.K}} &nbsp; &nbsp; Ca: {{object.Ca}} &nbsp; &nbsp; Cl: {{object.Cl}} &nbsp; &nbsp; Mg: {{object.Mg}}
+                &nbsp; &nbsp; P: {{object.P}}
+             </p>
+
+
+             <p><b>DESCRIPCIONES RADIOLOGICAS</b></p>
+             <p>
+                {{object.Rx_descripcion}}
+             </p>
+
+
+             <p><b>Anotaciones Generales</b></p>
+             <p>
+                {{object.obs}}
+             </p>
+            
+
+             <p><h3>CONFIRMACION O REESTRUCTURACION DIAGNOSTICA</h3></p>           
+             <p>
+                <b>
+                    {{object.dxs | linebreaks}}
+                </b>
+             </p>
+
+             <p><h3>Reestructuración o Cambios en el Manejo</h3></p>  
+                <p>
+                    {{object.reest_man | linebreaks}}
+                </p>
+
+
+             <p><b>Interconsultantes</b></p>
+                <p>
+                    {{object.interconsultante1}}, &nbsp; &nbsp; {{object.interconsultante2}}, &nbsp; &nbsp; {{object.interconsultante3}}
+                </p>
+
+
+
+
+           <p><h3>Observaciones Especiales</h3></p>
+           
+                <p>NEUROLOGICO: {{object.NEUROLOGICO}}</p>
+                <p>RESPIRATORIO: {{object.RESPIRATORIO}}</p>
+                <P>HEMODINAMICO: {{object.HEMODINAMICO}}</P>
+                <p>INFECCIOSO: {{object.INFECCIOSO}} </p>
+                <p>METABOLICO: {{object.METABOLICO}} </p>
+                <p>VALORES ANORMALES: {{object.VALORES}} </p>
+
+           <b>Fecha de Realización:</b> <p><b>{{ object.timestamp }}</b></p>
+           <b>Ultima Actualización:</b> <p><b>{{ object.update }}</b></p>
+
+           
+          {% if request.user.is_staff %}
+          
+            <p><a href="{% url 'expediente:update_urgenciareev' object.id %}">Editar</a></p>
+            
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+{% endblock %}
+

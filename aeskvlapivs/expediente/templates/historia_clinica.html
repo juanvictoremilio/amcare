@@ -1,0 +1,263 @@
+
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Historia Clínica{% endblock %}
+{% block content %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <h2 class="section-heading mb-4" ALIGN="center">HISTORIA CLINICA</h2>
+        <h3 class="section-heading mb-4" >Identificación</h3>
+        <h4 class="section-heading mb-4" style="color:rgb(11, 7, 120)">Paciente: {{paciente.name}}</h4>
+        <div>
+        
+          <table  class="table table-responsive">
+          
+            <thead>
+              <tr>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Género</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Edad</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Teléfono</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">e-mail</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Nac. y Lugar de Nacimiento</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Etnia</th>
+              </tr>
+            </thead> 
+
+            <tbody>
+              
+                <tr>
+                    <td >{{paciente.gender}}</td>
+                    <td>{{paciente.age}} años</td>
+                    <td>{{paciente.phone}}</td>
+                    <td>{{paciente.email}}</td>
+                    <td>{{paciente.nationality}}</td>
+                    <td>{{paciente.etnia}}</td>
+                </tr>
+
+            </tbody>
+
+          </table>
+
+          <table  class="table table-responsive">
+          
+            <thead>
+              <tr>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Escolaridad</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Empleo</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Religión</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Deporte</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Estado Civil</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Derechohabiencia</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Otros Servicios</th>
+              </tr>
+            </thead> 
+
+            <tbody>
+              
+                <tr>
+                    <td >{{paciente.scholarship}}</td>
+                    <td>{{paciente.job}}</td>
+                    <td>{{paciente.religion}}</td>
+                    <td>{{paciente.sport}}</td>
+                    <td>{{paciente.civil_status}}</td>
+                    <td>{{paciente.entitlement}}</td>
+                    <td>{{paciente.specify}}</td>
+                </tr>
+
+            </tbody>
+
+          </table>
+
+          <table class="table table-responsive">
+            
+            <thead>
+              <tr>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Aseguradora</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Domicilio</th>
+              </tr>
+            </thead> 
+
+            <tbody>
+              <tr>
+                <td>{{paciente.insurance}}</td>
+                <td >{{paciente.adress}}</td>
+              </tr>
+            </tbody>
+
+          </table>
+   
+          <br>
+
+          <h3 class="section-heading mb-4">Antecedentes inmediatos o Padecimiento Actual</h3>         
+          <p> {{paciente.immediate_background|linebreaks|safe}} </p>
+
+          <br>
+          
+          <h3 class="section-heading mb-4">Antecedentes Personales</h3>
+           <p>
+                Tabaquismo: {{paciente.smoking}}, &nbsp; &nbsp;
+                Alcoholismo: {{paciente.alcohol}}, &nbsp; &nbsp;
+                Adicciones: {{paciente.drugs_adictions}} ,&nbsp; &nbsp;
+                Alergias: {{paciente.allergies}}, &nbsp; &nbsp;
+                Dislipidemia: {{paciente.dislipidemia}}, &nbsp; &nbsp;
+                Diabetes: {{paciente.dm}}, &nbsp; &nbsp;
+                HTA: {{paciente.hta}}, &nbsp; &nbsp;
+                Infartos o angina de pecho: {{paciente.inf_ang_de_pecho}}, &nbsp; &nbsp;
+                Eventos Cerebrovasculares: {{paciente.evc}}, &nbsp; &nbsp;
+                Insuficiencia vascular periférica: {{paciente.ivp}}, &nbsp; &nbsp;
+                Enfermedad Pulmonar Obstructiva Crónica: {{paciente.EPOC}},&nbsp; &nbsp;
+                Cáncer: {{paciente.cancer}}
+          </p>
+
+           <br>
+
+           <h3 class="section-heading mb-4">Antecedentes Ginecoobstétricos si es el caso</h3>
+           <p>
+                Menarca: {{paciente.Menarca}}, &nbsp; &nbsp;  FUR: {{paciente.FUR}}, &nbsp; &nbsp;  Gestas: {{paciente.Gestas}}, &nbsp; &nbsp;  
+                Partos: {{paciente.Partos}}, &nbsp; &nbsp;  Cesáreas: {{paciente.Cesareas}}, &nbsp; &nbsp;
+                Ultimo Pappanicolaou: {{paciente.pap}},  &nbsp; &nbsp;  Ultima Mastografía: {{paciente.mast}}  
+           </p>
+
+           <p>
+            <b>
+              OBSERVACIONES GINECOOBSTETRICAS
+            </b>
+           </p>
+
+           <P>
+            {{paciente.obsgin}}
+           </P>
+
+           <h3 class="section-heading mb-4">Complemento de otros antecedentes y Enfermedades</h3>
+          <p>{{paciente.otras_enf}}</p>
+
+          <br>
+
+          <h3 class="section-heading mb-4">Lista de Medicamentos Actuales</h3>
+          <p>{{paciente.medications_list |linebreaks}}</p>
+
+          <br>
+          
+          <h3 class="section-heading mb-4" >Exploración Física</h3>
+          <p>{{paciente.actual_situation |linebreaks}}</p>
+
+          <br>
+
+          <table  class="table table-responsive">
+          
+            <thead>
+              <tr>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">FC</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">TA</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">PAM</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">FR</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">SaO2</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Temp</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Dextrostix</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">A1c</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Peso</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Estatura</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">IMC</th>
+              </tr>
+            </thead> 
+
+            <tbody>
+
+                <tr>
+                    <td >{{paciente.fc}}</td>
+                    <td>{{paciente.tension_sistolica}}/{{paciente.tension_diastolica}}</td>
+                    <td>{{paciente.pam}}</td>
+                    <td>{{paciente.fr}}</td>
+                    <td>{{paciente.saturacion}}</td>
+                    <td>{{paciente.temp}}</td>
+                    <td>{{paciente.dextrostix}}</td>
+                    <td>{{paciente.a1c}}</td>
+                    <td>{{paciente.peso}}</td>
+                    <td>{{paciente.estatura}}</td>
+                    <td>{{paciente.imc}}</td>
+                </tr>
+
+            </tbody>
+
+          </table>
+
+          <table  class="table table-responsive">
+          
+            <thead>
+              <tr>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">ASC</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Perímetro Abdominal</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Clasificación Masa Corporal</th>
+              </tr>
+            </thead> 
+
+            <tbody>
+              
+                <tr>
+                    <td >{{paciente.asc}}</td>
+                    <td>{{paciente.per_abdominal}}</td>
+                    <td>{{paciente.climc}}</td>
+                </tr>
+
+            </tbody>
+
+          </table>
+
+            <br>
+
+            <h3 lass="section-heading mb-4">OBSERVACIONES</h3>
+             <p>{{paciente.obs | linebreaks}}</p>
+
+             <br>
+
+             <h3 class="section-heading mb-4">DIAGNOSTICOS</h3>
+             <p>{{paciente.diagnosis | linebreaks}}</p>
+
+             <br>
+
+           <h3 class="section-heading mb-4">MANEJOS Y TRATAMIENTOS</h3>
+           <p>{{paciente.txs | linebreaks}}</p>
+
+            <br>
+
+            <p> <b> CONSIDERACIONES ESPECIALES: </b> <b style = 'color:darkgoldenrod'>  {{paciente.sp_consideration}} </b>  </p>
+ 
+             <br> 
+
+           <h3 class="section-heading mb-4">ADENDUMS</h3>
+           <p>{{paciente.adendums | linebreaks}}</p>
+
+            <br>
+
+           <p><b>Fecha de Realización:</b> {{ paciente.timestamp }}</p>
+           <p><b>Última Actualización:</b> {{ paciente.update }}</p>
+
+           <br>
+
+            <p>
+              <a href="{% url 'expediente:actualizar_paciente' paciente.id %}">
+                <input type="submit" class="btn btn-secondary btn-sm" value="Actualizar Historia Clínica">
+               </a>
+               <a href="{% url 'expediente:pacientes' %}">
+                <input type="submit" class="btn btn-secondary btn-sm" value="Regresar">
+               </a>
+               <a href="{% url 'expediente:paciente' paciente.id paciente.name|slugify %}" >
+                <input type="submit" class="btn btn-success btn-sm" value="Resumen">
+               </a>
+            </p>
+            
+
+           <br>
+           
+          {% if request.user.is_staff %}
+
+           
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

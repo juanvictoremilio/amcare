@@ -1,0 +1,90 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Registro de Pacientes{% endblock %}
+{% block content %}
+{% include 'expediente/includes/top_menu.html' %}
+
+<header style = "color:rgb(11, 7, 120); text-align:center;"> 
+
+  <h2> 
+    Primer Abordaje
+  </h2> 
+  <p>
+    {% if user.is_authenticated %} 
+    {% with paciente_list|first as paciente %}
+    Bienvenido: <b>{{ paciente.user }}</b>
+  {% endwith %}
+    {% endif %}
+  </p>
+    <!--<p>
+      Primer Paso Obligatorio
+    </p>-->
+
+    <form action="{% url 'expediente:search_results' %}" method="get">
+      <input name="q" type="text" placeholder="Search...Nombre o Teléfono">
+    </form>
+
+</header>
+
+<main role="main">
+  <div class="container mb-4">
+      
+
+      <div class="row mt-3">
+        
+        <div class="col-md-9 mx-auto">
+          {% if user.is_authenticated %}       
+            <table class="table table-responsive">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Edad</th>
+                  <th>Teléfono</th>
+                  <th>e-mail</th>
+                  <th>Registro</th>
+                </tr>
+              </thead>
+            
+              <tbody> 
+                  {% for paciente in paciente_list %}
+                <tr>
+                    <td>{{paciente.id}}</td>
+                    <td> <a style="color:rgb(11, 7, 120);" href="{% url 'expediente:paciente' paciente.id paciente.name|slugify %}"  class="mb-4"><b>{{paciente.name}}</b> </a></td>
+                    <td>{{paciente.age}} </td>
+                    <td>{{paciente.phone}} </td>
+                    <td>{{paciente.email}} </td>
+                    <td>{{paciente.timestamp}} </td>
+                  </tr>
+                      {% endfor %}
+              </tbody>
+            </table>
+             {% else %}
+        <p>No tienes permiso para ver las publicaciones.</p>
+        {% endif %}
+        </div>
+        
+      </div>
+  </div>      
+              
+                
+              <!--  | <a href="#">Borrar</a>
+              -->
+              
+              
+              
+            
+              <!--
+              {% if request.user.is_staff %}
+                | <a href="#">Editar</a>
+                | <a href="#">Borrar</a>
+              {% endif %}
+              -->
+            </p>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+</main>
+{% endblock %}

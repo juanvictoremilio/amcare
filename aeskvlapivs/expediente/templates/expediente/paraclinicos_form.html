@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Nueva Consulta{% endblock %}
+{% block content %}
+{% include 'expediente/includes/paraclinicos_menu.html'%}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3 mb-3">
+      <div class="col-md-9 mx-auto">
+
+        <header style = "color: navy; text-align:center; "class="mb-1" > 
+          <h3>
+            Agregar nuevos Resultados
+          </h3> 
+        </header>
+
+            <p style = "color: navy; text-align:center; "class="mb-1">
+              Para Iniciar, registre y guarde el paciente, no suba ningún archivo
+            </p>
+            
+            <form action="" method="post"> {% csrf_token %}
+                <table>
+                    {{ form.as_p }}
+                </table>
+                <div class="text-center">
+                  <input type="submit" class="btn btn-primary btn-block" value="Guardar nuevo abordaje" />
+                </div>                
+            </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

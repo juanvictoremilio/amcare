@@ -1,0 +1,84 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Páginas{% endblock %}
+{% block content %}
+{% include 'expediente/includes/consulta_menu.html' %}
+
+
+<header style = "color:rgb(11, 7, 120); text-align:center;"> 
+  <h2> 
+    Abordajes de primera vez en Consultorio
+  </h2> 
+    <p>
+      Consultas o Internamientos
+    </p>
+
+    <form action="{% url 'expediente:search_consulta' %}" method="get">
+      <input name="q" type="text" placeholder="Search...Nombre">
+    </form>
+
+</header>
+
+
+<main role="main">
+  <div class="container mb-4">
+    
+      <div class="row mt-3">
+        
+        <div class="col-md-9 mx-auto">
+          {% if user.is_authenticated %} 
+        <table class="table table-responsive"> 
+          <thead>
+            <tr>
+              <th class="mb-4">ID</th>
+              <th class="mb-4">Nombre</th>
+              <th class="mb-4">Edad</th>
+              <th class="mb-4">Registro</th>
+            </tr>
+          </thead>   
+            <tbody>
+              {% for consulta in consulta_list %}
+                <tr>
+                  <td>{{consulta.id}}</td>
+                  <td><a style="color:rgb(11, 7, 120);" href="{% url 'expediente:consulta' consulta.id consulta.patient|slugify %}"  class="mb-4"><b>{{consulta.patient}}</b></a></td>
+                  <td>
+                       {% for obj in paciente_list %}
+                              {{obj.age}}
+                      {% endfor %}
+                  </td>                     
+                  <td>{{consulta.timestamp}} </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+
+          </table>
+          {% endif %}
+        <div>
+
+        
+          
+
+              
+              
+                
+              <!--  | <a href="#">Borrar</a>
+              -->
+              
+              
+              
+            
+              <!--
+              {% if request.user.is_staff %}
+                | <a href="#">Editar</a>
+                | <a href="#">Borrar</a>
+              {% endif %}
+              -->
+            </p>
+          </div>
+        </div>
+      </div>
+      
+  </div>
+</main>
+{% endblock %}

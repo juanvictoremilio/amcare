@@ -1,0 +1,80 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Reevaluciones{% endblock %}
+{% block content %}
+{% include 'expediente/includes/reevaluacion_menu.html' %}
+
+<header style = "color:rgb(11, 7, 120); text-align:center;"> 
+  
+  <h2> 
+    Reevaluaciones Consultorio / Hospital
+  </h2> 
+  <p>
+    {% if request.user.is_authenticated %}
+    {% with reevaluacion_list|first as pac %}
+    Bienvenido: <b>{{ pac.user }}</b>
+  {% endwith %}
+    {% endif %}
+  </p>
+  <form action="{% url 'expediente:reev_search_results' %}" method="get">
+    <input name="q" type="text" placeholder="Search...Nombre, ID">
+  </form>
+</header>
+
+<main role="main">
+  <div class="container mb-4">
+    
+      <div class="row mt-3">
+        {% if request.user.is_authenticated %}
+        <div class="col-md-9 mx-auto">
+          <table class="table table-responsive"> 
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Registro</th>
+              </tr>
+            </thead>   
+            <tbody>
+              {% for pac in reevaluacion_list %}
+                <tr>
+                  <td>{{pac.id}} </td>
+                    <td> 
+                      <a style="color:rgb(11, 7, 120);" href="{% url 'expediente:reevaluacion' pac.id %}"  class="mb-4">
+                        <b>
+                          {{pac.paciente}}
+                        </b> 
+                      </a>
+                    </td>
+                    <td>{{pac.age}} </td>
+                    <td>{{pac.timestamp}} </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+          </table>
+              
+              
+                
+              <!--  | <a href="#">Borrar</a>
+              -->
+              {% endif %}
+              
+              
+              
+            
+              <!--
+              {% if request.user.is_staff %}
+                | <a href="#">Editar</a>
+                | <a href="#">Borrar</a>
+              {% endif %}
+              -->
+            </p>
+          </div>
+        </div>
+      </div>
+    
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}Páginas{% endblock %}
+{% block content %}
+{% include 'expediente/includes/reevaluacion_menu.html' %}
+
+<header style = "color:rgb(11, 7, 120); text-align:center;"> 
+
+  <h2> 
+    Search Results de Reevaluación de Pacientes
+  </h2> 
+  <p>
+
+  </p>
+
+    <form action="{% url 'expediente:reev_search_results' %}" method="get">
+      <input name="q" type="text" placeholder="Search...Nombre,">
+    </form>
+
+</header>
+<main role="main">
+  <div class="container mb-4">
+
+      <ul>
+        {% for pac in reevaluacion_list %}
+          <li>
+            <a style="color:rgb(11, 7, 120);" href="{% url 'expediente:reevaluacion' pac.id %}"  class="mb-4">
+            <p>
+              <b>
+                {{pac.paciente}} 
+              </b> 
+            </p>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+  </div>
+</main>
+
+  
+
+{% endblock %}
+<!--
+              {% if request.user.is_staff %}
+                | <a href="#">Editar</a>
+                | <a href="#">Borrar</a>
+              {% endif %}
+              -->
+

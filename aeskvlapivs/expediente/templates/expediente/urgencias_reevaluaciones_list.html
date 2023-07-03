@@ -1,0 +1,55 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %} Evaluaciones Subsecuentes Ugencias {% endblock %}
+{% block content %}
+{% include 'expediente/includes/urgenciasreev_menu.html' %}
+
+<header style = "color:dimgrey; text-align:center;" > 
+  <h2> Reevaluaciones Subsecuentes Urgencias</h2> 
+</header>
+
+<form action="{% url 'expediente:search_results_urgenciasreev' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form>
+
+<main role="main">
+  <div class="container mb-4">
+    {% for urg_reev in urgencias_reevaluaciones_list %}
+      <div class="row mt-3">
+        <div class="col-md-9 mx-auto">
+          <h4 style = "color:rgba(0, 0, 128, 0.805); "class="mb-4">  {{urg_reev.paciente}}</h4>
+          <div>
+            <p>{{urg_reev.sit_actual|striptags|safe|truncatechars:"200"}}</p>
+            <p>{{urg_reev.dxs_previos|linebreaks}}</p>
+            {% if request.user.is_staff %}
+            <p><a href="{% url 'expediente:urgencias_reev_detail' urg_reev.id urg_reev.paciente|slugify %}">Resumen</a> &nbsp; &nbsp;
+              <a href="{% url 'expediente:update_urgenciareev' urg_reev.id %}">Editar</a> &nbsp; &nbsp;
+              <a href="{% url 'expediente:delete_urgenciareev' urg_reev.id %}">Eliminar</a>
+
+            
+           
+              
+             
+              
+                
+              <!--  | <a href="#">Borrar</a>
+              -->
+              {% endif %}
+              
+              
+              
+            
+              <!--
+              {% if request.user.is_staff %}
+                | <a href="#">Editar</a>
+                | <a href="#">Borrar</a>
+              {% endif %}
+              -->
+            </p>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+</main>
+{% endblock %}

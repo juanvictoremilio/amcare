@@ -1,0 +1,157 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{consulta.patient}}{% endblock %}
+{% block content %}
+{% include 'expediente/includes/consulta_menu.html' %}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <h2 class="section-heading mb-4">Resumen Clínico</h2>
+        <h4 class="section-heading mb-4" style="color:rgb(11, 7, 120)">Paciente: {{paciente.name}}</h4>
+        <div>
+          <p><b> {{paciente.timestamp}} </b></p>
+          <table  class="table table-responsive">
+            <thead>
+              <tr>
+                <th>Diagnósticos</th>
+                <th>Medicamentos</th>
+                <th>Alergias</th>
+                <th>Observaciones Especiales</th>
+              </tr>
+            </thead> 
+            <tbody>
+                <tr>
+                    <td style="color:rgb(11, 7, 120);" class="mb-4">                      
+                        <b>
+                          {{paciente.diagnosis | linebreaks}}
+                        </b>                      
+                    </td>
+                    <td style="color:rgb(11, 7, 120);" class="mb-4">
+                         <b>
+                          {{paciente.medications_list | linebreaks}} 
+                         </b>
+                    </td>
+                    <td style="color:rgb(11, 7, 120);" class="mb-4">
+                      <b>
+                        {{paciente.allergies}} 
+                      </b>
+                    </td>
+                    <td style="color:darkgoldenrod"; class="mb-4">
+                      <b>
+                        {{paciente.sp_consideration}} 
+                      </b>
+                </tr>
+
+            </tbody>
+
+          </table>
+          <p>Edad: {{paciente.age}} años</p>
+           ANTECEDENTES INMEDIATOS: <p>{{paciente.immediate_background|linebreaks|safe}} </p>
+           OTROS ANTECEDENTES: <p>{{paciente.otras_enf|linebreaks}}</p>
+           LISTA DE MEDICAMENTOS ACTUALES: <P> {{paciente.medications_list | linebreaks}} </P>
+           EXPLORACION FISICA: <p>{{paciente.actual_situation |linebreaks}}</p>
+           SIGNOS VITALES: 
+           
+           <div>
+
+           <table  class="table table-responsive">
+          
+            <thead>
+              <tr>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">FC</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">TA</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">PAM</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">FR</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">SaO2</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Temp</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Dextrostix</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">A1c</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Peso</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Estatura</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">IMC</th>
+              </tr>
+            </thead> 
+
+            <tbody>
+
+                <tr>
+                    <td >{{paciente.fc}}</td>
+                    <td>{{paciente.tension_sistolica}}/{{paciente.tension_diastolica}}</td>
+                    <td>{{paciente.pam}}</td>
+                    <td>{{paciente.fr}}</td>
+                    <td>{{paciente.saturacion}}</td>
+                    <td>{{paciente.temp}}</td>
+                    <td>{{paciente.dextrostix}}</td>
+                    <td>{{paciente.a1c}}</td>
+                    <td>{{paciente.peso}}</td>
+                    <td>{{paciente.estatura}}</td>
+                    <td>{{paciente.imc}}</td>
+                </tr>
+
+            </tbody>
+
+          </table>
+
+          <table  class="table table-responsive">
+          
+            <thead>
+              <tr>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">ASC</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Perímetro Abdominal</th>
+                <th style="color:rgb(11, 7, 120);" class="mb-4">Clasificación Masa Corporal</th>
+              </tr>
+            </thead> 
+
+            <tbody>
+              
+                <tr>
+                    <td >{{paciente.asc}}</td>
+                    <td>{{paciente.per_abdominal}}</td>
+                    <td>{{paciente.climc}}</td>
+                </tr>
+
+            </tbody>
+
+          </table>
+        </div>
+
+           OBSERVACIONES: <p>{{paciente.obs | linebreaks}}</p>
+           <b>DXS:</b> <p>{{paciente.diagnosis | linebreaks}}</p>
+           MANEJO: <p>{{paciente.txs | linebreaks}}</p>
+           PLAN<P>{{paciente.adendums | linebreaks}}</P>
+           INTERCONSULTANTE: <p>{{paciente.especialidad}}</p>
+           <p>ESPECIFIQUE OTRO INTERCONSULTANTE: {{paciente.esp_otro}} </p>
+           <p> <b> CONSIDERACIONES ESPECIALES: </b> <b style = 'color:darkgoldenrod'>  {{paciente.sp_consideration}} </b>  </p>
+           Fecha de Realización: <p>{{ paciente.timestamp }}</p>
+           Ultima Actualización: <p>{{ paciente.update }}</p>
+
+           
+          {% if user.is_authenticated %}
+          
+            <p ><a href="{% url 'expediente:actualizar_paciente' paciente.id %}">
+              <input type="submit" class="btn btn-secondary btn-sm" value="Editar">
+              <a href="{% url 'expediente:pacientes' %}">
+              <input type="submit" class="btn btn-secondary btn-sm" value="Regresar">
+              <a href="{% url 'expediente:historia_clinica' paciente.id %}">
+                <input type="submit" class="btn btn-success btn-sm" value="Historia Clínica">
+              <!--<a href="{% url 'expediente:eliminar_paciente' paciente.id %}">
+                <input type="submit" class="btn btn-dark btn-sm" value="Eliminar Consulta">
+              </a> --></p>
+
+          {% endif %}
+          <br>
+
+          
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,95 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{object.paciente}}{% endblock %}
+{% block content %}
+{% include 'expediente/includes/reevaluacion_menu.html'%}
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto">
+        <h2 class="section-heading mb-4">Resumen</h2>
+        <h4 class="section-heading mb-4" style="color:rgb(11, 7, 120)">Paciente: {{object.paciente}}</h4>
+        <div>
+
+          <p><b> {{object.timestamp}} </b></p>
+
+          <table  class="table table-responsive">
+            <thead>
+              <tr>
+                <th>Diagnósticos</th>
+                <th>Manejos y Tx</th>
+                <th>Alergias</th>
+                <th>Observaciones Especiales</th>
+              </tr>
+            </thead> 
+            <tbody>
+                <tr>
+                    <td style="color:rgb(11, 7, 120);" class="mb-4">                      
+                        <b>
+                          {{object.diagnosis | linebreaks}}
+                        </b>                      
+                    </td>
+                    <td style="color:rgb(11, 7, 120);" class="mb-4">
+                         <b>
+                          {{object.txs | linebreaks}} 
+                         </b>
+                    </td>
+                    <td style="color:rgb(11, 7, 120);" class="mb-4">
+                      <b>
+                        {{object.allergies}} 
+                      </b>
+                    </td>
+                    <td style="color:darkgoldenrod;" class="mb-4">
+                      <b>
+                        {{object.sp_consideration}} 
+                      </b>
+                </tr>
+
+            </tbody>
+
+          </table>
+
+
+
+          <p>Edad: {{object.age}} años</p>
+           ANTECEDENTES INMEDIATOS SITUACION O PADECIMIENTO ACTUAL: <p>{{object.immediate_background|linebreaks|safe}} </p>
+           DIAGNOSTICOS PREVIOS: <P>{{object.dxs_previos | linebreaks}}</P>
+           SIGNOS VITALES: <p>FC {{object.fc}}, &nbsp; &nbsp; &nbsp; TA {{object.tension_sistolica}}/{{object.tension_diastolica}}, &nbsp; &nbsp; &nbsp;     
+            PAM: {{object.pam}}, &nbsp; &nbsp; &nbsp;FR: {{object.fr}},&nbsp; &nbsp; &nbsp; AVPU: {{object.AVPU}}, &nbsp; &nbsp; &nbsp; 
+            Temp: {{object.temp}}, &nbsp; &nbsp; &nbsp;    Sa02: {{object.saturation}}, 
+            Dextrostix: {{object.dextrostix}},&nbsp; &nbsp; &nbsp;  A1c: {{object.a1c}}, &nbsp; &nbsp; &nbsp; 
+            Peso: {{object.peso}}, &nbsp; &nbsp; &nbsp;Estatura: {{object.estatura}}, &nbsp; &nbsp; &nbsp;
+            IMC: {{object.imc}},&nbsp; &nbsp; &nbsp; Clasificación Masa Corporal: <b>{{object.climc}}</b>, &nbsp; &nbsp; &nbsp; ASC: {{object.asc}},   
+            Per. Abdominal: {{object.per_abdominal}} cms. </p>
+            E.F.: <p> {{object.expl}} </p>
+
+           OBSERVACIONES: <p>{{object.obs | linebreaks}}</p>
+           DXS: <p>{{object.diagnosis | linebreaks}}</p>
+           MANEJO: <p>{{object.txs | linebreaks}}</p>
+           <p><b>Fecha de Registro de Reevaluación: </b>{{object.timestamp}}</p>
+           <p><b>Actualización: </b>{{object.update}}</p>
+           
+           
+           
+           {% if user.is_authenticated %}
+          
+           <p ><a href="{% url 'expediente:actualizar_reevaluacion' object.id %}">
+             <input type="submit" class="btn btn-secondary btn-sm" value="Editar">
+
+             <a href="{% url 'expediente:reevaluaciones' %}">
+             <input type="submit" class="btn btn-secondary btn-sm" value="Regresar">
+
+             <a href="{% url 'expediente:eliminar_reevaluacion' object.id %}">
+               <input type="submit" class="btn btn-dark btn-sm" value="Eliminar Reevaluación">
+           </a>
+           </p>
+
+            {% endif %}
+
+            <br>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

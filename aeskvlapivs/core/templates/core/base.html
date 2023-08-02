@@ -28,6 +28,7 @@
           </button>
           <div class="collapse navbar-collapse" id="ned">
             <ul class="navbar-nav mr-auto">
+              {% if request.user.is_authenticated %}
               <li class="nav-item {% if request.path == '/' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'home' %}">Inicio</a>
               </li>
@@ -49,6 +50,7 @@
               <li class="nav-item">
                 <a class="nav-link" href=""></a>
             </li> 
+            {% endif %}
             </ul>
             <ul class="navbar-nav">
               {% if not request.user.is_authenticated %}
@@ -58,14 +60,14 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'signup' %}">
-                  <button style="background-color: rgb(9, 105, 69); border:none" type="submit" class="btn btn-primary" id="submitBtn">Subscribe</button>
+                  <button style="background-color: rgb(9, 105, 69); border:none" type="submit" class="btn btn-primary" id="submitBtn">Regístrese</button>
                 </a>
               </li>
               <li>
-                  <a class="nav-link" href="{% url 'join' %}">
+                  <!--<a class="nav-link" href="{% url 'join' %}">
                     <button type="submit" class="btn btn-primary" id="submitBtn">Subscribe</button>
                   </a>
-              </li>
+              </li>-->
                {% else %}
                <li class="nav-item">
                 <a class="nav-link" href="{% url 'logout' %}">Salir</a>

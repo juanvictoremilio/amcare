@@ -11,6 +11,14 @@ class HomePageView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['Tittle'] = 'EASKVLAPIVS'
         return context
+    
+class WellcomePageView(TemplateView):
+    template_name = "core/wellcome.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['Tittle'] = 'EASKVLAPIVS'
+        return context
 
 class SamplePageView(TemplateView):
     template_name = "core/sample.html"

@@ -29,10 +29,10 @@
           <div class="collapse navbar-collapse" id="ned">
             <ul class="navbar-nav mr-auto">
               {% if request.user.is_authenticated %}
-              <li class="nav-item {% if request.path == '/' %}active{% endif %}">
-                <a class="nav-link" href="{% url 'home' %}">Inicio</a>
+              <li class="nav-item {% if request.path == '/wellcome/' %}active{% endif %}">
+                <a class="nav-link" href="{% url 'bienvenida' %}">Inicio</a>
               </li>
-              <li class="nav-item {% if request.path == '/pacientes/' %}active{% endif %}">
+              <!--<li class="nav-item {% if request.path == '/pacientes/' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'expediente:pacientes' %}">Primera vez / Hist Clínica</a>
               </li>
               <li class="nav-item {% if request.path == '/pacientes/consultas/' %}active{% endif %}">
@@ -43,7 +43,7 @@
               </li>
               <li class="nav-item {% if request.path == '/pacientes/paraclinicos/' %}active{% endif %}">
                 <a class="nav-link" href="{% url 'expediente:paraclinicos' %}">Paraclínicos</a>
-            </li> 
+            </li> -->
               <li class="nav-item">
                   <a class="nav-link" href=""></a>
               </li>  
@@ -51,7 +51,7 @@
                 <a class="nav-link" href=""></a>
             </li> 
             {% endif %}
-            </ul>
+            </ul>-->
             <ul class="navbar-nav">
               {% if not request.user.is_authenticated %}
               <li class="nav-item">

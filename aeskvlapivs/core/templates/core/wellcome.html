@@ -1,6 +1,6 @@
 {% extends 'core/base.html' %}
 {% load static %}
-{% block title %}Inicio{% endblock %}
+{% block title %}Bienvenida{% endblock %}
 {% block content %}
 <head>
    <meta charset="utf-8">
@@ -14,18 +14,16 @@
  </head>
 
  <body>
-<div class="container">
-  <div style="padding-top:50px; text-align:center;">
-    <h1>{{Tittle}}</h1>
-       <p class="lead">Nuestro Escritorio Médico Profesional</p>
-       <p>
-          <i>
-             Para iniciar, acceda con su usuario y contraseña, o regístrese si aún no lo ha hecho
-          </i>
-       </p>
-    <img src="{% static 'core/img/aeskvlapivs.png' %}" class="img-fluid"/>    
-  </div>
- </div>
+
+   <div class="container">
+      <div style="padding-top:50px; text-align:center;">
+         <h1>{{Tittle}}</h1>
+            <p class="lead">
+               <b>Bienvenido:<b style="color:rgb(11, 7, 120);">{{user.username}}</b> </b>
+            </p>
+         <img src="{% static 'core/img/aeskvlapivs.png' %}" class="img-fluid"/>    
+      </div>
+   </div>
  
 </body>
 
